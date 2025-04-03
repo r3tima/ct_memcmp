@@ -3,9 +3,9 @@ name = "memcopy"
 version = "0.1.0"
 edition = "2021"
 
-[features]
-default = []
-tsx = []
+[lib]
+name = "memcopy"
+path = "src/lib.rs"
 
 [dependencies]
 libc = { version = "0.2", optional = false }
@@ -14,3 +14,8 @@ rand = "0.8"
 [[bin]]
 name = "memcopy"
 path = "src/main.rs"
+
+[features]
+default = []
+tsx = []
+fault = []
