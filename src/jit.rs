@@ -133,3 +133,29 @@ pub fn compile_ct_memcmp(size: usize) -> JitBuffer {
     
     jit
 }
+
+#[cfg(target_arch = "aarch64")]
+mod mte {
+    use super::*;
+    
+    pub fn generate_mte_memcmp(size: usize) -> JitBuffer {
+        let mut gen = CodeGenerator::new();
+        
+        gen.buffer.extend_from_slice(&[
+            0xE8, 0x07, 0x00, 0x58,
+            0xE8, 0x03, 0x00, 0x91, 
+            0x09, 0x01, 0x40, 0xF9, 
+        ]);
+        
+        gen.generate_ct_memcmp(size);
+        
+        let mut jit = JitBuffer::new(gen.buffer.len()).unwrap();
+        jit.write_instructions(0, &gen.buffer);
+        jit.make_executable();
+        
+        jit
+    }
+}
+
+#[cfg(target_arch = "aarch64")]
+pub use mte::generate_mte_memcmp;
