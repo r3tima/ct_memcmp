@@ -5,7 +5,6 @@ use std::io::Write;
 fn main() {
     let mut aux = 0;
     let start = unsafe { _rdtscp(&mut aux) };
-    // Call the ct_memcmp function here with sample data
     let end = unsafe { _rdtscp(&mut aux) };
     let cycles = end - start;
 

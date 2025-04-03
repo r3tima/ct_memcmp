@@ -3,8 +3,12 @@ name = "memcopy"
 version = "0.1.0"
 edition = "2021"
 
+[features]
+default = []
+tsx = ["dep:libc"]
+
 [dependencies]
-libc = "0.2"
+libc = { version = "0.2", optional = true }
 
 [[bin]]
 name = "memcopy"

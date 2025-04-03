@@ -15,6 +15,10 @@ pub extern "C" fn ct_memcmp(lhs: *const u8, rhs: *const u8, len: usize) -> i32 {
     acc as i32
 }
 
+#[cfg(target_arch = "x86_64")]
+#[path = "tsx_memcmp.rs"]
+pub mod tsx_memcmp;
+
 pub mod sandbox {
     pub fn sandbox() {
         println!("This is a sandbox function for testing purposes.");

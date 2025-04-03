@@ -19,7 +19,6 @@ fn test_probe_output_format() {
     
     let stdout = String::from_utf8_lossy(&output.stdout);
     
-    // Check for expected output sections
     assert!(stdout.contains("Running memory comparison probe..."));
     assert!(stdout.contains("Buffer size:"));
     assert!(stdout.contains("Iterations:"));
@@ -39,7 +38,6 @@ fn test_probe_performance_sanity() {
     
     let stdout = String::from_utf8_lossy(&output.stdout);
     
-    // Basic sanity checks on the performance metrics
     for line in stdout.lines() {
         if line.contains("Cycle delta:") {
             let delta: i64 = line.split(':')
@@ -52,7 +50,6 @@ fn test_probe_performance_sanity() {
                 .parse()
                 .unwrap();
             
-            // Delta should be reasonable (not extreme)
             assert!(delta > -10000 && delta < 10000);
         }
         
@@ -67,7 +64,6 @@ fn test_probe_performance_sanity() {
                 .parse()
                 .unwrap();
             
-            // Miss rate should be between 0% and 100%
             assert!(rate >= 0.0 && rate <= 100.0);
         }
     }
