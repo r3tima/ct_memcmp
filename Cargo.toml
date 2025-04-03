@@ -5,10 +5,11 @@ edition = "2021"
 
 [features]
 default = []
-tsx = ["dep:libc"]
+tsx = []
 
 [dependencies]
-libc = "0.2"
+libc = { version = "0.2", optional = false }
+rand = "0.8"
 
 [[bin]]
 name = "memcopy"
